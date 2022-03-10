@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+// use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
 class Authenticate extends Middleware
@@ -18,4 +19,15 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
+
+    // public function handle($request, Closure $next, ...$guards)
+    // {
+    //     if ($token = $request->cookie('acctkn')) {
+    //         $request->headers->set('Authorization', 'Bearer ' . $token);
+    //     }
+
+    //     $this->authenticate($request, $guards);
+
+    //     return $next($request);
+    // }
 }

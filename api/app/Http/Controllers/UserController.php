@@ -1,15 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use \App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
   public function index(Request $request)
   {
+
+    // if (!Auth::attempt($request->only('email', 'password'))) {
+    //   return response([
+    //     'message' => 'Invalid credentials!'
+    //   ], Response::HTTP_UNAUTHORIZED);
+    // }
+
+    // $user = Auth::user();
+
     if($request->email == "" || $request->password == ""){
       return response()->json([
         'error' => true,
@@ -26,7 +34,15 @@ class UserController extends Controller
     }
 
     $token = $user->createToken('token')->plainTextToken;
-    return response()->json([$user, $token], 201);
+    // $cookie = cookie('acctkn', $token, 60);
+    // return response([$user, $token])->withCookie($cookie);
+    return response()->json([$user, $token]);
 
+  }
+
+  public function logout(Request $request)
+  {
+    $request->user()->token()->revoke();
+    return response(['success' => true]);
   }
 }

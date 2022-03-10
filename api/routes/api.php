@@ -17,16 +17,17 @@ use \App\Http\Controllers\LogController;
 |
 */
 
+Route::post('/register', [UserController::class, 'index']);
 Route::post('/login', [UserController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-
+    
     Route::get('/', [IPController::class, 'index']);
     Route::post('/', [IPController::class, 'store']);
     Route::put('/{id}', [IPController::class, 'update']);
     Route::delete('/{id}', [IPController::class, 'destroy']);
-
     Route::get('/log', [LogController::class, 'index']);
+    Route::get('/logout', [UserController::class, 'logout']);
 
 });
 
