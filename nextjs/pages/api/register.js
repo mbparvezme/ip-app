@@ -37,7 +37,6 @@ export default async (req, res) => {
     res.json(val)
     res.end()
   }else{
-    // If the user is not found, return an error
     res.json(result)
   }
   return

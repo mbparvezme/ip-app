@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIpsTable extends Migration
+class AddForeignKeyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateIpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ips', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('ip', 15)->uniqid();
-            $table->string('label')->nullable();
-            $table->timestamps();
-        });
+      Schema::table('logs', function (Blueprint $table) {
+        $table->integer('ip_id')->unsigned()->change();
+        $table->foreign('ip_id')->references('id')->on('ips');
+      });
     }
 
     /**
@@ -28,6 +26,6 @@ class CreateIpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ips');
+        //
     }
 }

@@ -1,7 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 @layer base{
   html {
@@ -30,17 +31,18 @@
     --bg-tertiary       : 55,65,81;           /* #3f3f46 */
     --bg-alt            : var(--LIGHT-BASE);
   }
-  
 
   body{
+    font-family: 'Nunito', sans-serif;
     @apply bg-primary text-default dark:font-light;
   }
 
   [type="text"],[type="email"],[type="url"],[type="password"],[type="number"],[type="date"],[type="datetime-local"],[type="month"],[type="search"],[type="tel"],[type="time"],[type="week"],[multiple],textarea,select {
-    @apply w-full text-lg py-2 border-b border-black/10 focus:outline-none focus:border-brand;
+    @apply w-full text-lg py-2 border-b border-black/10 dark:border-black/50 focus:outline-none focus:border-brand dark:focus:border-brand;
+    @apply bg-transparent;
   }
   label{
-    @apply text-sm font-bold tracking-wide text-muted;
+    @apply text-sm font-bold dark:font-normal tracking-wide text-muted;
   }
   .cta-button{
     @apply bg-brand text-light p-4 w-full rounded-full tracking-wide font-semibold;
@@ -50,10 +52,13 @@
     @apply text-center text-3xl xl:text-4xl font-semibold lg:text-left mb-12;
   }
   thead th{
-    @apply px-2 py-3 bg-tertiary;
+    @apply px-2 py-3 bg-tertiary dark:font-medium;
   }
   tbody td{
     @apply px-2 py-3;
+  }
+  .topAlign tbody td{
+    @apply align-top;
   }
   tbody tr{
     @apply border-b border-tertiary;

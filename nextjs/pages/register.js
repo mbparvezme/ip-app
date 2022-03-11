@@ -26,7 +26,7 @@ const Register = () => {
       body: JSON.stringify({name, email, password, password_confirmation : confirmPass}),
       method: "post", headers: {"Content-Type": "application/json"}
     }).then(res => res.json())
-    
+
     if(data.success){
       localStorage.setItem("userData", JSON.stringify(data.user))
       window.location.href = "/admin"
@@ -35,6 +35,7 @@ const Register = () => {
       setError(data.message)
     }
   }
+
   return (
     <>
       <Head>
@@ -73,7 +74,7 @@ const Register = () => {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default Register;

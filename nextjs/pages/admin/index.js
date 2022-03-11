@@ -2,7 +2,7 @@ import cookie from "cookie"
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { useState } from "react"
-import { ValidateIPaddress, humanReadableTime } from  "../../lib/function"
+import { humanReadableTime } from  "../../lib/function"
 
 // This gets called on every request
 export async function getServerSideProps(context) {
@@ -91,12 +91,8 @@ const Admin = ({data}) => {
               return (
                 <tr key={item.id}>
                   <td>{index + 1}</td>
-                  {/* <td id={"data-ip-" + item.id} onDoubleClick={(n,e)=>handleDC(n,'ip',item.id, item.ip)}>{item.ip}</td>
-                  <td id={"data-label-" + item.id} onDoubleClick={(n,e)=>handleDC(n,'label',item.id, item.label)}>{item.label}</td> */}
-
                   <td>{item.ip}</td>
                   <td>{item.label}</td>
-
                   <td>{item.created_at ? humanReadableTime(item.created_at) : "n/a"}</td>
                   <td>{item.updated_at && item.created_at != item.updated_at ? humanReadableTime(item.updated_at) : "n/a"}</td>
                   <td>
@@ -135,13 +131,8 @@ const Admin = ({data}) => {
           </div>
         : ""
       }
-
-
-
     </>
   );
 }
 
-
 export default Admin;
-

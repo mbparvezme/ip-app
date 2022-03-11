@@ -76,6 +76,12 @@ class IPController extends Controller
         return response()->json(['data' => $ip, 'success' => true, 'error' => false], 200);
     }
 
+    public function logs()
+    {
+        $logs = (new LogModel())->log();
+        return response()->json($logs, 200);
+    }
+
     public function fallBack(){
         return response()->json('The resource you are looking for is unavailable!', 403);
     }

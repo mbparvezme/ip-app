@@ -10,7 +10,7 @@ const Login = () => {
   let login = async (e) => {
     e.preventDefault()
     if(!email || !password) {
-      alert("Please enter your email and password")
+      setError("Please enter your email and password")
       return
     }
 
@@ -51,10 +51,7 @@ const Login = () => {
             <input id="email" type="email" placeholder="email@gmail.com" onInput={(e)=>setEmail(e.target.value)}/>
           </div>
           <div className="mb-12">
-            <div className="flex justify-between items-center">
-              <label htmlFor="password">PASSWORD</label>
-              <Link href='/reset-password'><a className="text-xs font-semibold opacity-90 hover:opacity-100 text-brand">Forgot Password?</a></Link>
-            </div>
+            <label htmlFor="password">PASSWORD</label>
             <input id="password" type="password" placeholder="Enter your password" onInput={(e)=>setPassword(e.target.value)}/>
           </div>
           <button className="cta-button">LOG IN</button>

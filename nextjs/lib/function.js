@@ -11,9 +11,3 @@ export let humanReadableTime = (time) => {
   let hr = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
   return `${day}/${month}/${year} on ${hr}`
 }
-
-export let toggleTheme = () => {
-  localStorage.setItem("theme", localStorage.theme == "light" ? "dark" : "light")
-  document.querySelector("html").classList.remove("dark", "light")
-  document.querySelector("html").classList.add(localStorage.theme)
-}

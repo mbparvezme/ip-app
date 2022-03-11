@@ -3,7 +3,6 @@ use Illuminate\Support\Facades\Route;
 
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\IPController;
-use \App\Http\Controllers\LogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +15,7 @@ use \App\Http\Controllers\LogController;
 |
 */
 
-Route::get('/{any}', [IPController::class, 'fallBack']);
+// Route::get('/{any}', [IPController::class, 'fallBack']);
 Route::post('/register', [UserController::class, 'register']);
 Route::post('/login', [UserController::class, 'login']);
 
@@ -24,6 +23,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/', [IPController::class, 'index']);
     Route::post('/', [IPController::class, 'store']);
     Route::put('/{id}', [IPController::class, 'update']);
-    Route::get('/log', [LogController::class, 'index']);
+    Route::get('/log', [IPController::class, 'logs']);
     Route::get('/logout', [UserController::class, 'logout']);
 });

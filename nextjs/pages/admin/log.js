@@ -25,7 +25,7 @@ const Logs = ({data}) => {
 
       <div className="lg:w-4/5 xl:3/5 mx-auto">
         <h1 className="pageTitle">Activity Logs</h1>
-        <table className="table-auto w-full text-left">
+        <table className="table-auto w-full text-left topAlign">
           <thead>
             <tr>
               <th>Sl.</th>
@@ -39,11 +39,11 @@ const Logs = ({data}) => {
               return (
                 <tr key={item.id}>
                   <td>{index + 1}</td>
-                  <td>{item.ip_id}</td>
-                  <td>
+                  <td>{item.ip}</td>
+                  <td className='border-l border-black/10 dark:border-black/50'>
                     {d.map((v, i) => {
                       return (
-                        <p className='text-sm'>
+                        <p className='text-sm border-t border-black/10 dark:border-black/50 py-1 first:border-t-0'>
                           {v.action == "update" ?
                           `Updated to ${v.data.newLabel} from ${v.data.oldLabel}  by ${v.user.name} on ${humanReadableTime(v.time)}`:
                           `Deleted by ${v.user.name} on ${humanReadableTime(v.time)}`}

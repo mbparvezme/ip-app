@@ -15,7 +15,7 @@ class CreateLogsTable extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->integer('ip_id')->uniq();
+            $table->foreignId('ip_id')->constrained('ips');
             $table->json('data');
             $table->timestamps();
         });

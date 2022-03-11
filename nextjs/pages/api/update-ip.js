@@ -15,11 +15,8 @@ export default async (req, res) => {
     body: JSON.stringify({label, oldLabel, user})
   })
 
-  
   let result = await data.json()
-  console.log(result)
   res.statusCode = data.status
-
   res.json(result)
   res.end()
 
