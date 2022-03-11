@@ -15,7 +15,7 @@ git clone https://github.com/mbparvezme/ip-test.git
 ... or downloading [source code](https://github.com/mbparvezme/ip-test/archive/refs/heads/master.zip) as a zip archive.
 
 ## Setup Backend
-
+There are two API folders in the repository. The api-production version is ready for production use. Again, if you want to configure the backend, you can work with the api-development. In both cases, you just need to configure the database in .env.
 
 ## Setup Frontend
 To make the frontend ready to use `cd` to the **nextjs** directory and run the following commands
