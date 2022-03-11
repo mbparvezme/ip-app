@@ -9,4 +9,5 @@ class IPModel extends Model
 {
     use HasFactory;
     protected $table = 'ips';
+    protected $fillable = ['ip', 'label'];
 }

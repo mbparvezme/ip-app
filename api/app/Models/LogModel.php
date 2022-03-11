@@ -9,4 +9,5 @@ class LogModel extends Model
 {
     use HasFactory;
     protected $table = 'logs';
+    protected $fillable = ['ip_id', 'data'];
 }

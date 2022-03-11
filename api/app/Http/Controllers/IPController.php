@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Models\IPModel;
+use \App\Models\LogModel;
 
 class IPController extends Controller
 {
@@ -13,7 +15,8 @@ class IPController extends Controller
      */
     public function index()
     {
-        return "Index method";
+        $ips = IPModel::orderBy('id', 'Desc')->get();
+        return response()->json($ips, 200);
     }
 
     /**
@@ -24,18 +27,12 @@ class IPController extends Controller
      */
     public function store(Request $request)
     {
-        return "Store method";
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        return "Show method";
+        // $ip = new IPModel();
+        // $ip->ip = $request->ip;
+        // $ip->label = $request->label;
+        // $ip->save();
+        $ip = IPModel::create(['ip' => $request->ip, 'label' => $request->label]);
+        return response()->json(['data' => $ip, 'success' => true, 'error' => false], 201);
     }
 
     /**
@@ -47,17 +44,39 @@ class IPController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return "Update method";
+        $ip = IPModel::find($id);
+        if(isset($request->label)){
+            $ip->label = $request->label;
+            $val['data']['oldLabel'] = $request->oldLabel;
+            $val['data']['newLabel'] = $request->label;
+            $val['action'] = 'update';
+        }
+        if(isset($request->status)){
+            $ip->status = $request->status;
+            $val['action'] = 'delete';
+        }
+        $ip->save();
+        
+        $log = LogModel::where('ip_id', $id)->first();
+        $val['time'] = time();
+        $val['user'] = $request->user;
+        if($log){
+            $currentData = json_decode($log->data);
+            $currentData[] = $val;
+            $log->ip_id = $id;
+            $log->data = $currentData;
+            $log->save();
+        }else{
+            LogModel::create([
+                'ip_id' => $id,
+                'data' => json_encode([$val])
+            ]);
+        }
+
+        return response()->json(['data' => $ip, 'success' => true, 'error' => false], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        return "Destroy method";
+    public function fallBack(){
+        return response()->json('The resource you are looking for is unavailable!', 403);
     }
 }

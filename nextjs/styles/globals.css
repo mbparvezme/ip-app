@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base{
+  html {
+    --DARK-BASE         : 17,24,39;           /* #18181B */
+    --LIGHT-BASE        : 249,250,251;        /* #FAFAFC */
+
+    --brand             : 96,89,255;         /* #6059ff; */
+    --on-brand          : var(--LIGHT-BASE);
+
+    --text-default      : var(--DARK-BASE);
+    --text-muted        : 107,114,128;        /* #71717A */
+    --text-alt          : var(--LIGHT-BASE);
+
+    --bg-primary        : 255,255,255;        /* #FFFFFF */
+    --bg-secondary      : 248,250,252;        /* #F4F4F5 */
+    --bg-tertiary       : 241,245,249;        /* #E4E4E7 */
+    --bg-alt            : var(--DARK-BASE);
+  }
+  html.dark {
+    --text-default      : var(--LIGHT-BASE);
+    --text-muted        : 156,163,175;        /* #A1A1AA */
+    --text-alt          : var(--DARK-BASE);
+
+    --bg-primary        : var(--DARK-BASE);   /* #0F172A */
+    --bg-secondary      : 31,41,55;           /* #27272A */
+    --bg-tertiary       : 55,65,81;           /* #3f3f46 */
+    --bg-alt            : var(--LIGHT-BASE);
+  }
+  
+
+  body{
+    @apply bg-primary text-default dark:font-light;
+  }
+
+  [type="text"],[type="email"],[type="url"],[type="password"],[type="number"],[type="date"],[type="datetime-local"],[type="month"],[type="search"],[type="tel"],[type="time"],[type="week"],[multiple],textarea,select {
+    @apply w-full text-lg py-2 border-b border-black/10 focus:outline-none focus:border-brand;
+  }
+  label{
+    @apply text-sm font-bold tracking-wide text-muted;
+  }
+  .cta-button{
+    @apply bg-brand text-light p-4 w-full rounded-full tracking-wide font-semibold;
+    @apply focus:outline-none hover:opacity-90 shadow-lg;
+  }
+  .pageTitle{
+    @apply text-center text-3xl xl:text-4xl font-semibold lg:text-left mb-12;
+  }
+  thead th{
+    @apply px-2 py-3 bg-tertiary;
+  }
+  tbody td{
+    @apply px-2 py-3;
+  }
+  tbody tr{
+    @apply border-b border-tertiary;
+  }
+}
+
+nav{
+  @apply py-4 px-8;
+}
+nav a {
+  @apply py-2 px-4
+}
+nav .logo{
+  @apply mr-auto;
+}
+nav .links a{
+  @apply mr-4 last:mr-0 inline-block;
+}
