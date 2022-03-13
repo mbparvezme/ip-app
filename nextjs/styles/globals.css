@@ -63,6 +63,12 @@
   tbody tr{
     @apply border-b border-tertiary;
   }
+  button.active{
+    @apply bg-brand text-on-brand;
+  }
+  button.muted{
+    @apply bg-tertiary text-default;
+  }
 }
 
 nav{

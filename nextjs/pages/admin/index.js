@@ -7,7 +7,7 @@ import { humanReadableTime } from  "../../lib/function"
 // This gets called on every request
 export async function getServerSideProps(context) {
   const activeCookie = cookie.parse(context.req.headers.cookie).acctkn
-  let data = await fetch(process.env.API_URL, {
+  let data = await fetch(process.env.API_URL + 'ip', {
     headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + activeCookie
@@ -82,7 +82,7 @@ const Admin = ({data}) => {
               <th>IP</th>
               <th>Label</th>
               <th>Created</th>
-              <th>Updated</th>
+              <th>Last Updated</th>
               <th> </th>
             </tr>
           </thead>

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head'
+import validator from 'validator'
 
 const Login = () => {
   const [error, setError]       = useState(null)
@@ -11,6 +12,11 @@ const Login = () => {
     e.preventDefault()
     if(!email || !password) {
       setError("Please enter your email and password")
+      return
+    }
+
+    if(!validator.isEmail(email)){
+      setError('Please enter a valid email address!')
       return
     }
 

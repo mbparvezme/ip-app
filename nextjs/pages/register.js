@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head'
+import validator from 'validator'
 
 const Register = () => {
   const [error, setError] = useState(null)
@@ -12,15 +13,20 @@ const Register = () => {
   let register = async (e) => {
     e.preventDefault()
 
-    if(!name || !email || !password || !confirmPass) {
-      alert("Please complete te form properly!")
-      return
-    }
+    // if(!name || !email || !password || !confirmPass) {
+    //   setError("Please complete the form properly!")
+    //   return
+    // }
 
-    if(password !== confirmPass) {
-      alert("Passwords do not match!")
-      return
-    }
+    // if(!validator.isEmail(email)){
+    //   setError('Please enter a valid email address!')
+    //   return
+    // }
+
+    // if(password !== confirmPass) {
+    //   setError("Passwords do not match!")
+    //   return
+    // }
 
     let data = await fetch("/api/register", {
       body: JSON.stringify({name, email, password, password_confirmation : confirmPass}),
@@ -32,7 +38,17 @@ const Register = () => {
       window.location.href = "/admin"
     }
     else{
-      setError(data.message)
+      if(data.data){
+        let obj = data.data
+        let msg = ''
+        for (let prop in obj) {
+          if (obj.hasOwnProperty(prop)) {
+            msg += obj[prop][0]+'<br>'
+          }
+        }
+        setError( msg )
+      }
+      else setError(data.message)
     }
   }
 
@@ -46,8 +62,8 @@ const Register = () => {
       <div className="sm:w-1/2 lg:w-2/5 xl:max-w-2xl mx-auto">
         <h1 className="pageTitle">REGISTER</h1>
 
-        <p className={`${error ? "" : "hidden"}` + " bg-red text-red-light py-2 px-4 mb-8 rounded-md"}>
-          {error}
+        <p className={`${error ? "" : "hidden"}` + " bg-red text-red-light py-2 px-4 mb-8 rounded-md"} onClick={()=>setError(null)}>
+        <span dangerouslySetInnerHTML={{__html: error}} />
         </p>
 
         <form className="mb-8 flex flex-col" onSubmit={(e)=>register(e)}>

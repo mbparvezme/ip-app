@@ -15,7 +15,7 @@ export default async (req, res) => {
   let result = await data.json()
   res.statusCode = data.status
 
-  if(data.status === 201) {
+  if(result.success) {
     // Is user found set cookie and send response
     res.setHeader(
       "Set-Cookie",

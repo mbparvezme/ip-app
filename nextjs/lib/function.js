@@ -9,5 +9,5 @@ export let humanReadableTime = (time) => {
   let month = date.getMonth() + 1
   let year = date.getFullYear()
   let hr = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
-  return `${day}/${month}/${year} on ${hr}`
+  return `${day}/${month}/${year} at ${hr}`
 }

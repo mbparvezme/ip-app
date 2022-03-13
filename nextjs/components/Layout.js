@@ -52,10 +52,9 @@ const Layout = ({ children }) => {
     .then(res => res.json())
 
     if(data.success){
-      setModal(false)
       setIp('')
       setLabel('')
-      router.reload(window.location.pathname)
+      window.location.href = "/admin"
     }
     else{
       setError(data.message)
@@ -113,14 +112,14 @@ const Layout = ({ children }) => {
               </div>
               <button className="cta-button">ADD IP</button>
             </form>
-
           </div>
           : ""
         }
         {
           authData.isAuthUser ?
-          <button className="fixed bottom-8 right-8 text-white bg-brand p-4 w-12 h-12 rounded-full flex shadow-xl shadow-brand/20 hover:shadow-lg hover:shadow-brand/50 transition-shadow duration-300" onClick={()=>setModal(!modal)}>
-          <svg xmlns="http://www.w3.org/2000/svg" className={"w-full h-full stroke-light transform" + (modal ? ' rotate-45' : '')} viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
+          <button className="fixed bottom-8 right-8 text-white bg-brand p-4 w-auto h-12 rounded-full flex items-center shadow-xl shadow-brand/20 hover:shadow-lg hover:shadow-brand/50 transition-shadow duration-300" onClick={()=>setModal(!modal)}>
+            <svg xmlns="http://www.w3.org/2000/svg" className={"w-auto h-4 mr-2 stroke-light transform" + (modal ? ' rotate-45' : '')} viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
+            <span className='text-xs text-on-brand uppercase'>Add new IP</span>
           </button>
           : ""
         }
