@@ -1,25 +1,69 @@
-# Simple CRUD Operation
-This application is an example of a simple CRUD operation between the Laravel API backend and the NextJS frontend.
+# CRUD Operation
+This application is an example of a CRUD operation between the Laravel API backend and the NextJS frontend.
 
-## Laravel
-In this project, Laravel is working as a backend API application. The package [Sanctum](https://laravel.com/docs/9.x/sanctum) is working under the hood with Laravel 9 for authentication and authorization.
-
-## NextJS
-The frontend of the application has been developed by NextJS version `12.1.0`. It is connected with the backend to serve and populate data.
-
-# Setup
+## Setup
 Get the code by either cloning this repository using git
-```
+```sh
 git clone https://github.com/mbparvezme/ip-test.git
 ```
 ... or downloading [source code](https://github.com/mbparvezme/ip-test/archive/refs/heads/master.zip) as a zip archive.
 
-## Setup Backend
-There are two API folders in the repository. The api-production version is ready for production use. Again, if you want to configure the backend, you can work with the api-development. In both cases, you just need to configure the database in .env.
+## API Backend
+The api folder contains the backend part of the system. The backend of the application is developed with Laravel, the best existing PHP framework in the market. The [Sanctum](https://laravel.com/docs/9.x/sanctum) library is working under the hood with Laravel 9 for authentication and authorization.
 
-## Setup Frontend
-To make the frontend ready to use `cd` to the **nextjs** directory and run the following commands
-```bash
+### Requirements
+- PHP ^7.3|^8.0
+- Database MySQL, PostgreSQL, SQLite
+- Web Server Apache
+
+### Backend Installation
+Follow the following steps to set up the backend API of the application
+
+- Go to the **api** folder and copy the .env.example file and rename it to .env
+- Create a database on your server and configure the following database settings in the .env file with your database configuration:
+```
+DB_DATABASE=ip_app
+DB_USERNAME=root
+DB_PASSWORD=
+```
+- Import the *database.sql* file in your database to populate the tables and demo data. Or you can run the following artisan migration command to avoid manual importing.
+```sh
+php artisan migrate
+```
+
+```sh
+php artisan db:seed
+```
+### Access API
+After successful installation of the backend and database, you can access the API with the demo users credentials given below:
+> User ID: user1@email.com
+> Password: password1
+
+or
+
+> User ID: user2@email.com
+> Password: password2
+
+### API Endpoints
+| Details                | Method | API End Points            |
+| ---------------------- | ------ | ------------------------- |
+| Register               | POST   | [/register](#)            |
+| Login                  | POST   | [/login](#)               |
+
+Authenticated routes
+| Details                | Method | API End Points            |
+| ---------------------- | ------ | ------------------------- |
+| Get All IP             | GET    | [/ip](#)                  |
+| Add New IP             | POST   | [/](#)                    |
+| Update an IP           | PUT    | [/{id}](#)                |
+| Get all logs           | GET    | [/log](#)                 |
+| Logout                 | GET    | [/logout](#)              |
+
+> Note: You will need an authentication token to access the authenticated routes. The token will be generated with a successful registration or login.
+
+## Frontend
+The nextjs folder contains the frontend part of the application. To install the frontend, `cd` to the **nextjs** directory and run the following commands:
+```sh
 # go to the directory
 cd nextjs
 
@@ -39,6 +83,5 @@ Run the following command to publish this application:
 ```bash
 npm run build
 ```
-
 
 For any help or reviews, please visit [www.mbparvez.me](https://www.mbparvez.me)

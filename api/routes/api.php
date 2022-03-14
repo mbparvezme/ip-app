@@ -20,10 +20,10 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/ip', [ApiController::class, 'index']);
     Route::post('/', [ApiController::class, 'store']);
     Route::put('/{id}', [ApiController::class, 'update']);
     Route::get('/log', [ApiController::class, 'getLogs']);
-    Route::get('/ip', [ApiController::class, 'index']);
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 Route::get('/{any}', [ApiController::class, 'fallBack']);
