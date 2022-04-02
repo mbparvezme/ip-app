@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateIpsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateIpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ips', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('ip', 15)->uniqid();
-            $table->string('label')->nullable();
+        Schema::create('logs', function (Blueprint $table) {
+            $table->id();
+            $table->string('action');
+            $table->foreignId('item');
+            $table->json('data');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateIpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ips');
+        Schema::dropIfExists('logs');
     }
-}
+};

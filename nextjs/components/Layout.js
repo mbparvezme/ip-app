@@ -15,7 +15,6 @@ const Layout = ({ children }) => {
   let [error, setError] = useState(null)
   let [ip, setIp] = useState("")
   let [label, setLabel] = useState("")
-  const router = useRouter()
   const [colorTheme, setTheme] = useDarkMode();
 
   let logout = async () => {

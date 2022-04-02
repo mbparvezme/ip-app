@@ -82,7 +82,7 @@ const Logs = ({data}) => {
                     <td>{item.name}</td>
                     <td className='border-l border-black/10 dark:border-black/50'>
                       <p className='text-sm border-t border-black/10 dark:border-black/50 py-1 first:border-t-0'>
-                        <span dangerouslySetInnerHTML={{__html: `${d.data} on <i>${humanReadableTime(d.time)}</i>`}} />
+                        <span dangerouslySetInnerHTML={{__html: `${d.msg} on <i>${humanReadableTime(d.time)}</i>`}} />
                       </p>
                     </td>
                   </tr>

@@ -7,7 +7,7 @@ import { humanReadableTime } from  "../../lib/function"
 // This gets called on every request
 export async function getServerSideProps(context) {
   const activeCookie = cookie.parse(context.req.headers.cookie).acctkn
-  let data = await fetch(process.env.API_URL + 'ip', {
+  let data = await fetch(process.env.API_URL, {
     headers: {
       "Content-Type": "application/json",
       "Authorization": "Bearer " + activeCookie
@@ -19,8 +19,6 @@ export async function getServerSideProps(context) {
 
 const Admin = ({data}) => {
 
-  const router = useRouter()
-
   let [error, setError] = useState(null)
   let [editModal, setEditModal] = useState(null)
   let [id, setId] = useState(null)
@@ -28,10 +26,9 @@ const Admin = ({data}) => {
   let [label, setLabel] = useState("")
   let [oldLabel, setOldLabel] = useState("")
 
-  let handleEditModal = (id, ip, label) => {
+  let handleEditModal = (id, ip) => {
     setId(id)
     setIp(ip)
-    setLabel(label)
     setOldLabel(label)
     setEditModal(true)
   }
@@ -53,12 +50,13 @@ const Admin = ({data}) => {
     .then(res => res.json())
 
     if(data.success){
+      document.querySelector(`.label-${id}`).innerHTML = label
+      document.querySelector("#label").value = label
       setEditModal(false)
       setId(null)
       setIp("")
       setLabel("")
       setOldLabel("")
-      router.reload(window.location.pathname)
     }
     else{
       setError(data.message)
@@ -92,11 +90,11 @@ const Admin = ({data}) => {
                 <tr key={item.id}>
                   <td>{index + 1}</td>
                   <td>{item.ip}</td>
-                  <td>{item.label}</td>
+                  <td className={"label-" + item.id}>{item.label}</td>
                   <td>{item.created_at ? humanReadableTime(item.created_at) : "n/a"}</td>
                   <td>{item.updated_at && item.created_at != item.updated_at ? humanReadableTime(item.updated_at) : "n/a"}</td>
                   <td>
-                    <button onClick={() => handleEditModal(item.id, item.ip, item.label)}>
+                    <button onClick={() => handleEditModal(item.id, item.ip)}>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 stroke-brand" fill="none" viewBox="0 0 24 24" strokeWidth={1}><path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                     </button>
                   </td>

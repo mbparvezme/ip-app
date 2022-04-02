@@ -18,10 +18,4 @@ class Authenticate extends Middleware
             return route('login');
         }
     }
-
-    // Add new method 
-    protected function unauthenticated($request, array $guards)
-    {
-        abort(response('Forbidden for unauthenticated users!', 401));
-    }
 }
